@@ -149,7 +149,7 @@ key: {
             "imageMessage": { 
                 "mimetype": "image/jpeg", 
                 "caption": `kontol`, 
-                "jpegThumbnail": thumb
+                "jpegThumbnail": pp_bot
             } 
         } 
     }
