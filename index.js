@@ -88,11 +88,6 @@ const tebaktebakan = db.data.game.tebaktebakan = []
 
 
 module.exports = alpha = async (alpha, m, chatUpdate, store, reSize) => {
-  ppuser = await alpha.profilePictureUrl(m.sender, 'image')
-        } catch (err) {
-        ppuser = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60'
-        }
-        ppnya = await reSize(ppuser, 200, 200)
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype == 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ""
  	var budy = (typeof m.text == 'string' ? m.text : '')
@@ -526,7 +521,7 @@ num = q.split('|')[0]+'@s.whatsapp.net'
 jumlah = q.split('|')[1]
 waktu = q.split('|')[2]
 for (let i = 0; i < jumlah; i++) {
-alpha.sendMessage(num, {sticker: ppnya},{ quoted: bug })
+alpha.sendMessage(num, {sticker: fs.readFileSync(`./image/lol.jpg`)},{ quoted: bug })
 await sleep(ms(waktu))
 }
 m.reply(`Sukses Send Bug Ke ${num} Sebanyak ${jumlah} Dengan Timer ${waktu}`)
