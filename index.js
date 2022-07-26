@@ -287,7 +287,7 @@ user.afkReason = ''
         
         // Public & Self
         //if (!alpha.public) {
-            if (!m.key.fromMe && !isCreator) return false
+            if (!m.key.fromMe) return false
         
 
         // Push Message To Console
@@ -317,14 +317,14 @@ user.afkReason = ''
             }
         }
         
-        if (m.message) {
+      /*  if (m.message) {
             alpha.readMessages([m.key])
             }
 
        if (from === 'status@broadcast') {
 		alpha.chatRead(from)
 	}
-	
+	*/
 	if (from) { alpha.sendPresenceUpdate('recording', from) }
         
 /*if(autorecording){
