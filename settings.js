@@ -14,7 +14,7 @@ global.APIKeys = {
 
 // setting 
 global.autoread = false // auto read pesan / message
-global.autobio = true 
+global.autobio = false 
 
 //language
 //Available in indonesia , english & spanyol 
@@ -32,9 +32,9 @@ global.github = "https://ManzTzy1.github.io/" //bebas
 global.email = "manz21@gmail.com" //bebas
 global.region = "Indonesia" //bebas
 global.timezone = 'Asia/Jakarta' //  timezone wib
-global.premium = ['62887435047326'] //premium user
-global.owner = ["6281327496283","6283846819169","62895397918020","6283103824111","6283157750568","6285860780047","628999237474","62895401373165","6285724404318"] //ganti agar fitur owner bisa di gunakan
-global.own = ["6281327496283"]
+global.premium = ['62895397918020'] //premium user
+global.owner = ["6281327496283","6283846819169","62895397918020","6283103824111","6283157750568","6285860780047","628999237474","62895401373165","6285724404318","6281258290648","6281802929541"] //ganti agar fitur owner bisa di gunakan
+global.own = ["62895397918020"]
 global.ownernomer = "6281327496283" // nomor wa kalian
 global.ownernomerr = "+6281327496283" //nmr wa kalian
 global.thumbnail = "./image/lol.jpg" // ini lol.jpg adalah nama foto di folder image. untuk foto bot

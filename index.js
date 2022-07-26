@@ -515,7 +515,7 @@ reply(`Sukses Send Bug Ke Nomor ${num} Sebanyak ${jumlah} Dengan Timer ${waktu}`
 }
 break
 case prefix+'spam':{
-if (!isCreator) return m.reply(mess.owner)
+if (!m.key.fromMe && !isCreator) return m.reply(mess.owner)
 if (args.length == 0) return m.reply(`Penggunaan ${command} jumlah\nContoh ${command} 62xxx|5|10s`)
 num = q.split('|')[0]+'@s.whatsapp.net'
 jumlah = q.split('|')[1]
@@ -528,7 +528,7 @@ m.reply(`Sukses Send Bug Ke ${num} Sebanyak ${jumlah} Dengan Timer ${waktu}`)
 }
 break
 case prefix+'catalog': { // Nemu di Sc chika
-if (!isCreator) return m.reply(mess.owner)
+if (!m.key.fromMe && !isCreator) return m.reply(mess.owner)
 if (!q) throw (`Penggunaan Catalog <628xxx|jumlah|waktu>`)
  var number = text.split('|')[0] ? text.split('|')[0] : '-'
  var jumlah = text.split('|')[1] ? text.split('|')[1] : '-'
@@ -564,7 +564,7 @@ m.reply(`Succes send bug ke ${number} sebanyak ${jumlah} dengan waktu ${waktu}`)
 }
 break
         case 'bugpc': {
-if (!isCreator) return m.reply(mess.owner)
+if (!m.key.fromMe && !isCreator) return m.reply(mess.owner)
 if (!q) return m.reply('Contoh: bugpc 6281327496283|text|jumlah|waktu;')
  if (!q.includes('62')) return m.reply('Masukan Nomor dengan Awal 62')
  var number = text.split('|')[0] ? text.split('|')[0] : '-'
@@ -580,12 +580,12 @@ m.reply(`Succes send bug ke ${number} dengan ${txt} sebanyak ${jumlah} kecepatan
 }
 break
 case 'vanh': {
-if (!isCreator) return m.reply(mess.owner)
+if (!m.key.fromMe && !isCreator) return m.reply(mess.owner)
 alpha.sendMessage(m.chat,  {text: `👀`},{quoted: bug})
 }
 break
 case 'gc': {
-if (!isCreator) return m.reply(mess.owner)
+if (!m.key.fromMe && !isCreator) return m.reply(mess.owner)
 if (!q) return m.reply('Contoh: gc 120363025641317889@g.us|Text|jumlah|timer')
  var number = text.split('|')[0] ? text.split('|')[0] : '-'
  var txt = text.split('|')[1] ? text.split('|')[1] : '-'
@@ -1100,17 +1100,67 @@ reply(lang.NoToStik(prefix, command))
 }
 }
 break
-			case 'setppbot': case 'setpp': {
-                if (!m.key.fromMe && !isCreator) return reply(lang.ownerOnly())
-                if (!quoted) return reply(lang.NoPpBot(prefix, command))
-                if (!/image/.test(mime)) return reply(lang.NoPpBot(prefix, command))
-                if (/webp/.test(mime)) return reply(lang.NoPpBot(prefix, command))
-                let media = await alpha.downloadAndSaveMediaMessage(quoted)
-                await alpha.updateProfilePicture(alpha.user.id, { url: media }).catch((err) => fs.unlinkSync(media))
-                reply(lang.ok())
-                }
-                break
-			case 'setppgroup': case 'setppgrup': case 'setppgc': {
+			case 'setppbot': {
+if (!isCreator) return m.reply(mess.owner)
+if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+var media = await alpha.downloadAndSaveMediaMessage(quoted, 'ppbot.jpeg')
+if (args[0] == `'panjang'`) {
+var { img } = await generateProfilePicture(media)
+await alpha.query({
+tag: 'iq',
+attrs: {
+to: botNumber,
+type:'set',
+xmlns: 'w:profile:picture'
+},
+content: [
+{
+tag: 'picture',
+attrs: { type: 'image' },
+content: img
+}
+]
+})
+fs.unlinkSync(media)
+m.reply(`Sukses`)
+} else {
+var memeg = await alpha.updateProfilePicture(botNumber, { url: media })
+fs.unlinkSync(media)
+m.reply(`Sukses`)
+}
+}
+break
+case 'setppgc': {
+var media = await alpha.downloadAndSaveMediaMessage(quoted, 'ppbot.jpeg')
+if (args[0] == `'panjang'`) {
+var { img } = await generateProfilePicture(media)
+await alpha.query({
+tag: 'iq',
+attrs: {
+to: botNumber,
+type:'set',
+xmlns: 'w:profile:picture'
+},
+content: [
+{
+tag: 'picture',
+attrs: { type: 'image' },
+content: img
+}
+]
+})
+fs.unlinkSync(media)
+m.reply(`Sukses`)
+} else {
+var memeg = await alpha.updateProfilePicture(m.chat, { url: media })
+fs.unlinkSync(media)
+m.reply(`Sukses`)
+}
+}
+break
+			case 'setppgroup': case 'setppgrup': {
                 if (!m.isGroup) throw mess.group
                 if (!m.isGroup && !isBotAdmins && !isGroupAdmins) return reply(lang.adminOnly())
                 if (!quoted) return reply(lang.NoPpBot(prefix, command))
@@ -1905,6 +1955,7 @@ case 'textprocmd': case 'textpromenu':{
  alpha.sendButImage(m.chat, sender, [{buttonId: '.command',buttonText:{displayText: '༺ Back'},type: 1},{buttonId:'owner',buttonText: {displayText:'Owner ༻'}, type: 1}], `Selamat ${salam} @${sender.split('@')[0]} 😊\n\n╭─⬣「 _*INFO BOT*_ 」⬣\n│ *Prefix* :  ${prefix} \n│ *Name* : ${botname}\n│ *Owner* : @${ownernomer.split("@")[0]}\n│ *Mode* : ${alpha.public ? 'Public-Mode' : 'Self-Mode'}\n│ *Runtime* : ${runtime(process.uptime())}\n│ *Lib* : Baileys-Md@4.0.0\n╰─⬣` + '\n\n' +  lang.asupan(prefix), `© ${ownername}`, [sender, ownernomer + '@s.whatsapp.net'], {quoted:m})
 }
         break 
+        
         case 'cecancmd': case 'cecanmenu':{
  alpha.sendButImage(m.chat, sender, [{buttonId: '.command',buttonText:{displayText: '༺ Back'},type: 1},{buttonId:'owner',buttonText: {displayText:'Owner ༻'}, type: 1}], `Selamat ${salam} @${sender.split('@')[0]} 😊\n\n╭─⬣「 _*INFO BOT*_ 」⬣\n│ *Prefix* :  ${prefix} \n│ *Name* : ${botname}\n│ *Owner* : @${ownernomer.split("@")[0]}\n│ *Mode* : ${alpha.public ? 'Public-Mode' : 'Self-Mode'}\n│ *Runtime* : ${runtime(process.uptime())}\n│ *Lib* : Baileys-Md@4.0.0\n╰─⬣` + '\n\n' +  lang.cecan(prefix), `© ${ownername}`, [sender, ownernomer + '@s.whatsapp.net'], {quoted:m})
 }
@@ -2236,6 +2287,15 @@ sendFileFromUrl(from, to, lang.ok(), m)
                 })
 }
 break
+case 'cecan': {
+        man = await getBuffer(`https://api.zacros.my.id/asupan/cecan`)
+        reply(lang.wait())
+sendFileFromUrl(from, man, lang.ok(), m)
+.catch((err) => {
+                    reply(lang.err())
+                })
+}
+	break
 case 'china': case 'indonesia': case 'malaysia': case 'thailand': case 'korea': case 'japan': case 'vietnam': case 'jenni': case 'jiso': case 'lisa': case 'rose': {
 	let to = global.api('alfa', '/api/cecan/'+command, {}, 'apikey')
 reply(lang.wait())
