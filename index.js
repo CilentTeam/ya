@@ -286,9 +286,9 @@ user.afkReason = ''
         }
         
         // Public & Self
-        if (!alpha.public) {
-            if (!m.key.fromMe && !isCreator) return
-        }
+        //if (!alpha.public) {
+            if (!m.key.fromMe && !isCreator) return false
+        
 
         // Push Message To Console
         if (m.message) {
